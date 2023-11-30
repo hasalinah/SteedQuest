@@ -724,7 +724,7 @@ window.OverworldMaps = {
  RegionFive: {
     id: "RegionFive",
     lowerSrc: "/images/maps/MainRegion5.png",
-   // upperSrc: "/images/maps/MainRegion1Upper.png",
+   /upperSrc: "/images/maps/MainRegion1Upper.png",
     configObjects: {
       hero: {
         type: "Person",

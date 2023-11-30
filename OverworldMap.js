@@ -720,6 +720,203 @@ window.OverworldMaps = {
       [utils.asGridCoords(10,20)] : true,
     }
   },
+
+ RegionFive: {
+    id: "RegionFive",
+    lowerSrc: "/images/maps/MainRegion5.png",
+   // upperSrc: "/images/maps/MainRegion1Upper.png",
+    configObjects: {
+      hero: {
+        type: "Person",
+        isPlayerControlled: true,
+        x: utils.withGrid(1),
+        y: utils.withGrid(14),
+        src: "/images/characters/people/hero.png",
+      },
+      farmer1 : {
+        type: "Person",
+        x: utils.withGrid(7),
+        y: utils.withGrid(2),
+        src: "/images/characters/people/farmer1.png",
+        behaviorLoop: [
+          { type: "walk", direction: "right", time: 2800 },
+          { type: "walk", direction: "right", time: 2800 },
+          { type: "walk", direction: "right", time: 2800 },
+          { type: "walk", direction: "right", time: 2800 },
+          { type: "walk", direction: "right", time: 2800 },
+          { type: "walk", direction: "right", time: 2800 },
+          { type: "stand", direction: "right", time: 3000 },
+          { type: "walk", direction: "left", time: 2800 },
+          { type: "walk", direction: "left", time: 2800 },
+          { type: "walk", direction: "left", time: 2800 },
+          { type: "walk", direction: "left", time: 2800 },
+          { type: "walk", direction: "left", time: 2800 },
+          { type: "walk", direction: "left", time: 2800 },
+          { type: "stand", direction: "left", time: 3000 },
+        ],
+        talking: [
+          {
+            required: ["TALKED_FARMER1"],
+            events: [
+              { type: "textMessage", text: "Keep an eye out for more apples and carrots! They come in handy during battles.", faceHero: "farmer1" }
+            ]
+          },
+          {
+            events: [
+              { type: "textMessage", text: "Hello, traveler. There is apples and carrots in the orchard to use during the race?", faceHero: "farmer1" },
+              { type: "textMessage", text: "They won't do much for you, but your horse will love them.", faceHero: "farmer1"},
+              { type: "textMessage", text: "Here's an carrot for the road.", faceHero: "farmer1"},
+              { type: "addItemToInventory", item: { actionId: "item_recoverStatus", instanceId: "appleItem" } }, // duplicate for carrots/speed
+              { type: "addStoryFlag", flag: "TALKED_FARMER1" },
+            ]
+          }
+        ]
+      },
+      trainer2: {
+        type: "Person",
+        x: utils.withGrid(4),
+        y: utils.withGrid(11),
+        src: "/images/characters/people/trainer2.png",
+        behaviorLoop: [
+          { type: "walk", direction: "down", time: 2800 },
+          { type: "walk", direction: "down", time: 2800 },
+          { type: "stand", direction: "down", time: 2800 },
+          { type: "walk", direction: "up" , time: 2800},
+          { type: "walk", direction: "up" , time: 2800},
+          { type: "stand", direction: "up", time: 2800 },
+        ],
+        talking: [
+          {
+            required: ["BATTLED_SELENE"],//RACE SCENE replace
+            events: [
+              { type: "textMessage", text: "Lets Race horses to see who's best... I know it will be me!", faceHero: "trainer2" }
+            ]
+          },
+          {
+            events: [
+              { type: "textMessage", text: "I've been waiting for someone to battle!", faceHero: "trainer2"},
+              { type: "battle", enemyId: "selene" },
+              { type: "addStoryFlag", flag: "TALKED_FARMER" },
+            ]
+          }
+        ]
+      },
+      apple: {
+        type: "Apple",
+        id: "apple1",
+        x: utils.withGrid(4),
+        y: utils.withGrid(7),
+        storyFlag: "COLLECTED_APPLE1"
+      },
+      apple2: {
+        type: "Apple",
+        id: "apple2",
+        x: utils.withGrid(16),
+        y: utils.withGrid(6),
+        storyFlag: "COLLECTED_APPLE2"
+      },
+      apple3: {
+        type: "Apple",
+        id: "apple3",
+        x: utils.withGrid(46),
+        y: utils.withGrid(16),
+        storyFlag: "COLLECTED_APPLE3"
+      },
+    },
+   /* cutsceneSpaces: {
+      [utils.asGridCoords(10,19)]: [
+        {
+          events: [
+            {
+              type: "changeMap",
+              map: "MainRegion1Upper",
+              x: utils.withGrid(4),
+              y: utils.withGrid(0),
+              direction: "down"
+            }
+          ]
+        }
+      ],
+      [utils.asGridCoords(19,9)]: [
+        {
+          events: [
+            {
+              type: "changeMap",
+              map: "RegionFour",
+              x: utils.withGrid(0),
+              y: utils.withGrid(9),
+              direction: "right"
+            }
+          ]
+        }
+      ]
+    },*/
+    walls: {
+      [utils.asGridCoords(0,5)] : true,
+      [utils.asGridCoords(0,6)] : true,
+      [utils.asGridCoords(0,7)] : true,
+      [utils.asGridCoords(0,8)] : true,
+      [utils.asGridCoords(0,9)] : true,
+      [utils.asGridCoords(0,10)] : true,
+      [utils.asGridCoords(0,11)] : true,
+      [utils.asGridCoords(0,12)] : true,
+      [utils.asGridCoords(0,13)] : true,
+      [utils.asGridCoords(0,14)] : true,
+      [utils.asGridCoords(0,15)] : true,
+      [utils.asGridCoords(1,4)] : true,
+      [utils.asGridCoords(2,5)] : true,
+      [utils.asGridCoords(3,5)] : true,
+      [utils.asGridCoords(4,4)] : true,
+      [utils.asGridCoords(5,4)] : true,
+      [utils.asGridCoords(5,3)] : true,
+      [utils.asGridCoords(5,2)] : true,
+      [utils.asGridCoords(5,1)] : true,
+      [utils.asGridCoords(6,0)] : true,
+      [utils.asGridCoords(7,0)] : true,
+      [utils.asGridCoords(8,0)] : true,
+      [utils.asGridCoords(9,0)] : true,
+      [utils.asGridCoords(10,0)] : true,
+      [utils.asGridCoords(11,0)] : true,
+      [utils.asGridCoords(12,0)] : true,
+      [utils.asGridCoords(13,0)] : true,
+      [utils.asGridCoords(14,0)] : true,
+      [utils.asGridCoords(15,1)] : true,
+      [utils.asGridCoords(15,2)] : true,
+      [utils.asGridCoords(15,3)] : true,
+      [utils.asGridCoords(16,4)] : true,
+      [utils.asGridCoords(17,4)] : true,
+      [utils.asGridCoords(18,4)] : true,
+      [utils.asGridCoords(19,5)] : true,
+      [utils.asGridCoords(19,6)] : true,
+      [utils.asGridCoords(19,7)] : true,
+      [utils.asGridCoords(19,8)] : true,
+      [utils.asGridCoords(19,10)] : true,
+      [utils.asGridCoords(19,11)] : true,
+      [utils.asGridCoords(19,12)] : true,
+      [utils.asGridCoords(19,13)] : true,
+      [utils.asGridCoords(19,14)] : true,
+      [utils.asGridCoords(19,15)] : true,
+      [utils.asGridCoords(20,9)] : true,
+      [utils.asGridCoords(1,16)] : true,
+      [utils.asGridCoords(2,16)] : true,
+      [utils.asGridCoords(3,16)] : true,
+      [utils.asGridCoords(4,16)] : true,
+      [utils.asGridCoords(4,17)] : true,
+      [utils.asGridCoords(4,18)] : true,
+      [utils.asGridCoords(5,19)] : true,
+      [utils.asGridCoords(6,19)] : true,
+      [utils.asGridCoords(7,19)] : true,
+      [utils.asGridCoords(8,19)] : true,
+      [utils.asGridCoords(9,19)] : true,
+      [utils.asGridCoords(11,19)] : true,
+      [utils.asGridCoords(12,19)] : true,
+      [utils.asGridCoords(13,19)] : true,
+      [utils.asGridCoords(14,19)] : true,
+      [utils.asGridCoords(15,19)] : true,
+      [utils.asGridCoords(16,19)] : true,
+      [utils.asGridCoords(10,20)] : true,
+    }
+  },
   
   RegionFour: {
     id: "RegionFour",

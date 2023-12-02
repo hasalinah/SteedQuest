@@ -1,12 +1,11 @@
 class Progress {
     constructor() {
-        this.mapId = "StartingMap";
+        this.mapId = "MainRegion5";
         this.startingHeroX = 0;
         this.startingHeroY = 0;
         this.startingHeroDirection = "down";
         this.saveFileKey = "SteedQuest_SaveFile1"
     }
-
     save() {
         window.localStorage.setItem(this.saveFileKey, JSON.stringify({
             mapId: this.mapId,

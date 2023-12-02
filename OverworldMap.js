@@ -19,7 +19,7 @@ class OverworldMap {
   
     drawLowerImage(ctx, cameraPerson) {
       ctx.drawImage(
-        this.lowerImage, 
+        this.lowerImage,
         utils.withGrid(10.5) - cameraPerson.x, 
         utils.withGrid(6) - cameraPerson.y
         )
@@ -165,7 +165,47 @@ window.OverworldMaps = {
                   ]
                 }
               ]
-            }
+            },
+            npc3: {
+              //chapter 1 Roderick - intro 
+              type: "Person",
+              x: utils.withGrid(14),//changed position
+              y: utils.withGrid(8),
+              src: "/images/characters/people/npc3.png",
+              behaviorLoop: [
+                { type: "stand", direction: "left", time: 1800},
+                { type: "stand", direction: "down", time: 1800 },
+                { type: "stand", direction: "right", time: 1400 },
+                { type: "stand", direction: "down", time: 1300 },
+              ],
+              talking: [
+                {
+                  required: ["HEALED_ELORA"],
+                  events: [
+                   // { type: "textMessage", text: "You're strong, but you can always be better. Try battling and race your horse to improve.", faceHero: "npc3" },
+                   //  { type: "textMessage", text: "Good luck, young one!", faceHero: "npc3" },
+                  ]
+                },
+                {
+                  required: ["BATTLED_ELORA"],
+                  events: [
+                   // { type: "textMessage", text: "I've been watching you, young one. You've got potential.", faceHero: "npc3" },
+                   // { type: "healHorsesHp" },
+                   // { type: "addStoryFlag", flag: "HEALED_ELORA" },
+                  ]
+                },
+                {
+                  events: [
+                    { type: "textMessage", text: "Welcome, My name is Roderick!", faceHero:"npc3" },
+                    { type: "textMessage", text: "I've been watching you. You may have potential...", faceHero:"npc3" },
+                    { type: "textMessage", text: "You're strong, but you can always be better. Try battling and race your horse to improve.", faceHero:"npc3" },
+                    { type: "textMessage", text: "Good luck on your journey young one!", faceHero:"npc3" },
+                //    { type: "battle", enemyId: "elora" }, //may need to be changed 
+                //   { type: "addStoryFlag", flag: "BATTLED_ELORA" },
+                  ]
+                }
+              ]
+        },
         },
         walls: {
           [utils.asGridCoords(-1,8)] : true,
@@ -227,14 +267,14 @@ window.OverworldMaps = {
                   map: "RegionOne",
                   x: utils.withGrid(0),
                   y: utils.withGrid(10),
-                  direction: "right" 
+                  direction: "right"
                 }
               ]
             }
           ]
         }
     },
-    RegionOne: {
+    RegionOne: { //chapter2 
       id: "RegionOne",
       lowerSrc: "/images/maps/Region1Lower.png",
       upperSrc: "/images/maps/Region1Upper.png",
@@ -286,7 +326,44 @@ window.OverworldMaps = {
           y: utils.withGrid(7),
           storyFlag: "USED_HORSE_SPAWNER_R1",
           horses: ["n006", "n003"]
-       },
+      },
+      guy5: {
+        //orik - blacksmith 
+        type: "Person",
+        x: utils.withGrid(5),
+        y: utils.withGrid(2),
+        src: "/images/characters/people/guy5.png",
+        behaviorLoop: [
+          { type: "stand", direction: "right", time: 2800 },
+          { type: "stand", direction: "down", time: 2400 },
+          { type: "stand", direction: "up", time: 1300 },
+        ],
+        talking: [
+          {
+            required: ["BATTLED_FINROD"],
+            events: [
+       //       { type: "textMessage", text: "Hello young trainer, My name is Orik i'm the local blacksmith", faceHero: "guy5" },
+       //       { type: "textMessage", text: "I can forge powerful gear for your horses.", faceHero: "guy5" },
+            ]
+          },
+          {
+            required: ["USED_HORSE_SPAWNER_R1"],
+            events: [
+          //    { type: "textMessage", text: "I see...you were able to open the magical egg...interesting.", faceHero: "guy5" },
+          //    { type: "textMessage", text: "Why don't we put that new horse of yours to the test?!", faceHero: "guy5" },
+          //    { type: "battle", enemyId: "finrod" },
+          //    { type: "addStoryFlag", flag: "BATTLED_FINROD" },
+            ]
+          },
+          {
+            events: [
+              { type: "textMessage", text: "Hello young trainer, My name is Orik i'm the local blacksmith", faceHero: "guy5" },
+              { type: "textMessage", text: "I can forge powerful gear for your horses.", faceHero: "guy5" },
+            ]////////add weapons stand...?
+          }
+        ]
+      },
+
     },
     walls: {
       [utils.asGridCoords(-1,0)] : true,
@@ -372,19 +449,19 @@ window.OverworldMaps = {
       [utils.asGridCoords(4,0)]: [
         {
           events: [
-            { 
-              type: "changeMap", 
+            {
+              type: "changeMap",
               map: "RegionThree",
               x: utils.withGrid(10),
               y: utils.withGrid(19),
-              direction: "up" 
+              direction: "up"
             }
           ]
         }
       ]
     }
   },
-  RegionTwo: {
+  RegionTwo: { //Chapter3 
     id: "RegionTwo",
     lowerSrc: "/images/maps/Region2Lower.png",
     upperSrc: "/images/maps/Region2Upper.png",
@@ -530,7 +607,7 @@ window.OverworldMaps = {
       ]
     }
   },
-  RegionThree: {
+  RegionThree: { //chapter 4 
     id: "RegionThree",
     lowerSrc: "/images/maps/Region3Lower.png",
     upperSrc: "/images/maps/Region3Upper.png",
@@ -604,7 +681,7 @@ window.OverworldMaps = {
           },
           {
             events: [
-              { type: "textMessage", text: "I've been waiting for someone to battle!", faceHero: "trainer3"},
+              { type: "textMessage", text: "I've been waiting for someone to battle! Lets see if you can keep up with me.", faceHero: "trainer3"},
               { type: "battle", enemyId: "selene" },
               { type: "addStoryFlag", flag: "BATTLED_SELENE" },
             ]
@@ -720,205 +797,8 @@ window.OverworldMaps = {
       [utils.asGridCoords(10,20)] : true,
     }
   },
-
- RegionFive: {
-    id: "RegionFive",
-    lowerSrc: "/images/maps/MainRegion5.png",
-   /upperSrc: "/images/maps/MainRegion1Upper.png",
-    configObjects: {
-      hero: {
-        type: "Person",
-        isPlayerControlled: true,
-        x: utils.withGrid(1),
-        y: utils.withGrid(14),
-        src: "/images/characters/people/hero.png",
-      },
-      farmer1 : {
-        type: "Person",
-        x: utils.withGrid(7),
-        y: utils.withGrid(2),
-        src: "/images/characters/people/farmer1.png",
-        behaviorLoop: [
-          { type: "walk", direction: "right", time: 2800 },
-          { type: "walk", direction: "right", time: 2800 },
-          { type: "walk", direction: "right", time: 2800 },
-          { type: "walk", direction: "right", time: 2800 },
-          { type: "walk", direction: "right", time: 2800 },
-          { type: "walk", direction: "right", time: 2800 },
-          { type: "stand", direction: "right", time: 3000 },
-          { type: "walk", direction: "left", time: 2800 },
-          { type: "walk", direction: "left", time: 2800 },
-          { type: "walk", direction: "left", time: 2800 },
-          { type: "walk", direction: "left", time: 2800 },
-          { type: "walk", direction: "left", time: 2800 },
-          { type: "walk", direction: "left", time: 2800 },
-          { type: "stand", direction: "left", time: 3000 },
-        ],
-        talking: [
-          {
-            required: ["TALKED_FARMER1"],
-            events: [
-              { type: "textMessage", text: "Keep an eye out for more apples and carrots! They come in handy during battles.", faceHero: "farmer1" }
-            ]
-          },
-          {
-            events: [
-              { type: "textMessage", text: "Hello, traveler. There is apples and carrots in the orchard to use during the race?", faceHero: "farmer1" },
-              { type: "textMessage", text: "They won't do much for you, but your horse will love them.", faceHero: "farmer1"},
-              { type: "textMessage", text: "Here's an carrot for the road.", faceHero: "farmer1"},
-              { type: "addItemToInventory", item: { actionId: "item_recoverStatus", instanceId: "appleItem" } }, // duplicate for carrots/speed
-              { type: "addStoryFlag", flag: "TALKED_FARMER1" },
-            ]
-          }
-        ]
-      },
-      trainer2: {
-        type: "Person",
-        x: utils.withGrid(4),
-        y: utils.withGrid(11),
-        src: "/images/characters/people/trainer2.png",
-        behaviorLoop: [
-          { type: "walk", direction: "down", time: 2800 },
-          { type: "walk", direction: "down", time: 2800 },
-          { type: "stand", direction: "down", time: 2800 },
-          { type: "walk", direction: "up" , time: 2800},
-          { type: "walk", direction: "up" , time: 2800},
-          { type: "stand", direction: "up", time: 2800 },
-        ],
-        talking: [
-          {
-            required: ["BATTLED_SELENE"],//RACE SCENE replace
-            events: [
-              { type: "textMessage", text: "Lets Race horses to see who's best... I know it will be me!", faceHero: "trainer2" }
-            ]
-          },
-          {
-            events: [
-              { type: "textMessage", text: "I've been waiting for someone to battle!", faceHero: "trainer2"},
-              { type: "battle", enemyId: "selene" },
-              { type: "addStoryFlag", flag: "TALKED_FARMER" },
-            ]
-          }
-        ]
-      },
-      apple: {
-        type: "Apple",
-        id: "apple1",
-        x: utils.withGrid(4),
-        y: utils.withGrid(7),
-        storyFlag: "COLLECTED_APPLE1"
-      },
-      apple2: {
-        type: "Apple",
-        id: "apple2",
-        x: utils.withGrid(16),
-        y: utils.withGrid(6),
-        storyFlag: "COLLECTED_APPLE2"
-      },
-      apple3: {
-        type: "Apple",
-        id: "apple3",
-        x: utils.withGrid(46),
-        y: utils.withGrid(16),
-        storyFlag: "COLLECTED_APPLE3"
-      },
-    },
-   /* cutsceneSpaces: {
-      [utils.asGridCoords(10,19)]: [
-        {
-          events: [
-            {
-              type: "changeMap",
-              map: "MainRegion1Upper",
-              x: utils.withGrid(4),
-              y: utils.withGrid(0),
-              direction: "down"
-            }
-          ]
-        }
-      ],
-      [utils.asGridCoords(19,9)]: [
-        {
-          events: [
-            {
-              type: "changeMap",
-              map: "RegionFour",
-              x: utils.withGrid(0),
-              y: utils.withGrid(9),
-              direction: "right"
-            }
-          ]
-        }
-      ]
-    },*/
-    walls: {
-      [utils.asGridCoords(0,5)] : true,
-      [utils.asGridCoords(0,6)] : true,
-      [utils.asGridCoords(0,7)] : true,
-      [utils.asGridCoords(0,8)] : true,
-      [utils.asGridCoords(0,9)] : true,
-      [utils.asGridCoords(0,10)] : true,
-      [utils.asGridCoords(0,11)] : true,
-      [utils.asGridCoords(0,12)] : true,
-      [utils.asGridCoords(0,13)] : true,
-      [utils.asGridCoords(0,14)] : true,
-      [utils.asGridCoords(0,15)] : true,
-      [utils.asGridCoords(1,4)] : true,
-      [utils.asGridCoords(2,5)] : true,
-      [utils.asGridCoords(3,5)] : true,
-      [utils.asGridCoords(4,4)] : true,
-      [utils.asGridCoords(5,4)] : true,
-      [utils.asGridCoords(5,3)] : true,
-      [utils.asGridCoords(5,2)] : true,
-      [utils.asGridCoords(5,1)] : true,
-      [utils.asGridCoords(6,0)] : true,
-      [utils.asGridCoords(7,0)] : true,
-      [utils.asGridCoords(8,0)] : true,
-      [utils.asGridCoords(9,0)] : true,
-      [utils.asGridCoords(10,0)] : true,
-      [utils.asGridCoords(11,0)] : true,
-      [utils.asGridCoords(12,0)] : true,
-      [utils.asGridCoords(13,0)] : true,
-      [utils.asGridCoords(14,0)] : true,
-      [utils.asGridCoords(15,1)] : true,
-      [utils.asGridCoords(15,2)] : true,
-      [utils.asGridCoords(15,3)] : true,
-      [utils.asGridCoords(16,4)] : true,
-      [utils.asGridCoords(17,4)] : true,
-      [utils.asGridCoords(18,4)] : true,
-      [utils.asGridCoords(19,5)] : true,
-      [utils.asGridCoords(19,6)] : true,
-      [utils.asGridCoords(19,7)] : true,
-      [utils.asGridCoords(19,8)] : true,
-      [utils.asGridCoords(19,10)] : true,
-      [utils.asGridCoords(19,11)] : true,
-      [utils.asGridCoords(19,12)] : true,
-      [utils.asGridCoords(19,13)] : true,
-      [utils.asGridCoords(19,14)] : true,
-      [utils.asGridCoords(19,15)] : true,
-      [utils.asGridCoords(20,9)] : true,
-      [utils.asGridCoords(1,16)] : true,
-      [utils.asGridCoords(2,16)] : true,
-      [utils.asGridCoords(3,16)] : true,
-      [utils.asGridCoords(4,16)] : true,
-      [utils.asGridCoords(4,17)] : true,
-      [utils.asGridCoords(4,18)] : true,
-      [utils.asGridCoords(5,19)] : true,
-      [utils.asGridCoords(6,19)] : true,
-      [utils.asGridCoords(7,19)] : true,
-      [utils.asGridCoords(8,19)] : true,
-      [utils.asGridCoords(9,19)] : true,
-      [utils.asGridCoords(11,19)] : true,
-      [utils.asGridCoords(12,19)] : true,
-      [utils.asGridCoords(13,19)] : true,
-      [utils.asGridCoords(14,19)] : true,
-      [utils.asGridCoords(15,19)] : true,
-      [utils.asGridCoords(16,19)] : true,
-      [utils.asGridCoords(10,20)] : true,
-    }
-  },
   
-  RegionFour: {
+  RegionFour: { //chapter5 
     id: "RegionFour",
     lowerSrc: "/images/maps/Region4Lower.png",
     upperSrc: "/images/maps/Region4Upper.png",
@@ -965,6 +845,44 @@ window.OverworldMaps = {
           }
         ]
       },
+      trainerA: {
+        type: "Person",
+        x: utils.withGrid(9),
+        y: utils.withGrid(6),
+        src: "/images/characters/people/guy6.png",
+        behaviorLoop: [
+          { type: "walk", direction: "up", time: 2800 },
+          { type: "walk", direction: "down", time: 2800 },
+          { type: "stand", direction: "down", time: 2800 },
+          { type: "walk", direction: "right", time: 2800 },
+          { type: "walk", direction: "right", time: 2800 },
+          { type: "stand", direction: "right", time: 2800 },
+          { type: "walk", direction: "up" , time: 2800},
+          { type: "walk", direction: "up" , time: 2800},
+          { type: "stand", direction: "up", time: 2800 },
+          { type: "walk", direction: "left" , time: 2800},
+          { type: "walk", direction: "left" , time: 2800},
+          { type: "stand", direction: "left", time: 2800 },
+        ],
+        talking: [
+          {
+            required: ["BATTLED_MARK"],
+            events: [
+         //     { type: "textMessage", text: "You are strong, but you're gonna need some better horses soon. I hope you can find some!", faceHero: "trainer1" }
+            ]
+          },
+          {
+            ///add apple bucket code but with herbs
+            events: [
+              { type: "textMessage", text: "I'm Thaddeus, a reclusive herbalist with a keen interest in magical herbs.", faceHero: "trainerA"},
+              { type: "textMessage", text: "I'm in need of a brave soul to go on a quest to fetch some rare herbs from the mountains.", faceHero: "trainerA"},
+             // { type: "battle", enemyId: "mark" },
+             // { type: "addStoryFlag", flag: "BATTLED_MARK" },
+            ]
+          }
+        ]
+      },
+
     },
     cutsceneSpaces: {
       [utils.asGridCoords(0,9)]: [
@@ -1291,6 +1209,19 @@ window.OverworldMaps = {
           ]
         }
       ],
+      [utils.asGridCoords(3,0)]: [
+        {
+          events: [
+            {
+              type: "changeMap", 
+              map: "MainRegion5",
+              x: utils.withGrid(10),
+              y: utils.withGrid(15),
+              direction: "up"
+            }
+          ]
+        }
+      ],
       [utils.asGridCoords(19,16)]: [
         {
           events: [
@@ -1394,6 +1325,206 @@ window.OverworldMaps = {
       [utils.asGridCoords(19,15)] : true,
     }
   },
+
+  MainRegion5: { //chapter 9 -- race 
+    id: "MainRegion5",
+    lowerSrc: "/images/maps/MainRegion5Lower.png",
+    upperSrc: "/images/maps/Region3Upper.png",
+    configObjects: {
+      hero: {
+        type: "Person",
+        isPlayerControlled: true,
+        x: utils.withGrid(5),
+        y: utils.withGrid(7),
+        src: "/images/characters/people/hero.png",
+      },
+      trainer2 : {
+        type: "Person",
+        x: utils.withGrid(7),
+        y: utils.withGrid(7),
+        src: "/images/characters/people/trainer2.png",
+        behaviorLoop: [
+          { type: "walk", direction: "right", time: 2800 },
+          { type: "walk", direction: "right", time: 2800 },
+          { type: "walk", direction: "right", time: 2800 },
+          { type: "walk", direction: "right", time: 2800 },
+          { type: "walk", direction: "right", time: 2800 },
+          { type: "walk", direction: "right", time: 2800 },
+          { type: "stand", direction: "right", time: 3000 },
+          { type: "walk", direction: "left", time: 2800 },
+          { type: "walk", direction: "left", time: 2800 },
+          { type: "walk", direction: "left", time: 2800 },
+          { type: "walk", direction: "left", time: 2800 },
+          { type: "walk", direction: "left", time: 2800 },
+          { type: "walk", direction: "left", time: 2800 },
+          { type: "stand", direction: "left", time: 3000 },
+        ],
+        talking: [
+          {
+            required: ["TALKED_FARMER1"],
+            events: [
+              { type: "textMessage", text: "Keep an eye out for more apples! They come in handy during races.", faceHero: "trainer2" }
+            ]
+          },
+          {
+            events: [
+              { type: "textMessage", text: "Howdy, traveler. Did you find any apples and carrots in these parts? The horse will love them they will recover faster during the race.", faceHero: "trainer2" },
+              { type: "textMessage", text: "Ladies and gentlemen, it's time for the race of a lifetime! Hold onto your hats!", faceHero: "trainer2"},
+              { type: "textMessage", text: "Here's an apple for the road.", faceHero: "trainer2"},
+              { type: "addItemToInventory", item: { actionId: "item_recoverHp", instanceId: "appleItem" } },
+              { type: "addStoryFlag", flag: "TALKED_FARMER1" },
+/// ADD RACE LIKE BATTLE HERE
+            ]
+          }
+        ]
+      },
+      trainer3: {
+        type: "Person",
+        x: utils.withGrid(4),
+        y: utils.withGrid(9),
+        src: "/images/characters/people/brannpc.png",
+        behaviorLoop: [
+          { type: "walk", direction: "down", time: 2800 },
+          { type: "walk", direction: "down", time: 2800 },
+          { type: "stand", direction: "down", time: 2800 },
+          { type: "walk", direction: "up" , time: 2800},
+          { type: "walk", direction: "up" , time: 2800},
+          { type: "stand", direction: "up", time: 2800 },
+        ],
+        talking: [
+          {
+            required: ["BATTLED_SELENE"],
+            events: [
+              { type: "textMessage", text: "We see you have some strong horses. See you around sometime, maybe for a rematch!", faceHero: "trainer3" }
+            ]
+          },
+          {
+            events: [
+              { type: "textMessage", text: "I've been waiting for someone to race! Lets see if you can keep up with me!", faceHero: "trainer3"},
+              { type: "textMessage", text: "I have a magnificent horse radiating an otherworldly aura, with unparalleled speed and grace.", faceHero: "trainer3"},
+              { type: "battle", enemyId: "selene" },
+              { type: "addStoryFlag", flag: "BATTLED_SELENE" },
+            ]
+          }
+        ]
+      },
+      apple: {
+        type: "Apple",
+        id: "apple1",
+        x: utils.withGrid(4),
+        y: utils.withGrid(7),
+        storyFlag: "COLLECTED_APPLE1"
+      },
+      apple2: {
+        type: "Apple",
+        id: "apple2",
+        x: utils.withGrid(14),
+        y: utils.withGrid(6),
+        storyFlag: "COLLECTED_APPLE2"
+      },
+      apple3: {
+        type: "Apple",
+        id: "apple3",
+        x: utils.withGrid(12),
+        y: utils.withGrid(6),
+        storyFlag: "COLLECTED_APPLE2"
+      },
+    },
+    cutsceneSpaces: {
+      [utils.asGridCoords(10,19)]: [
+        {
+          events: [
+            { 
+              type: "changeMap", 
+              map: "MainRegion2",
+              x: utils.withGrid(4),
+              y: utils.withGrid(0),
+              direction: "down" 
+            }
+          ]
+        }
+      ],
+      [utils.asGridCoords(19,9)]: [
+        {
+          events: [
+            { 
+              type: "changeMap", 
+              map: "RegionFour",
+              x: utils.withGrid(0),
+              y: utils.withGrid(9),
+              direction: "right" 
+            }
+          ]
+        }
+      ]
+    },
+    walls: {
+      [utils.asGridCoords(0,5)] : true,
+      [utils.asGridCoords(0,6)] : true,
+      [utils.asGridCoords(0,7)] : true,
+      [utils.asGridCoords(0,8)] : true,
+      [utils.asGridCoords(0,9)] : true,
+      [utils.asGridCoords(0,10)] : true,
+      [utils.asGridCoords(0,11)] : true,
+      [utils.asGridCoords(0,12)] : true,
+      [utils.asGridCoords(0,13)] : true,
+      [utils.asGridCoords(0,14)] : true,
+      [utils.asGridCoords(0,15)] : true,
+      [utils.asGridCoords(1,4)] : true,
+      [utils.asGridCoords(2,5)] : true,
+      [utils.asGridCoords(3,5)] : true,
+      [utils.asGridCoords(4,4)] : true,
+      [utils.asGridCoords(5,4)] : true,
+      [utils.asGridCoords(5,3)] : true,
+      [utils.asGridCoords(5,2)] : true,
+      [utils.asGridCoords(5,1)] : true,
+      [utils.asGridCoords(6,0)] : true,
+      [utils.asGridCoords(7,0)] : true,
+      [utils.asGridCoords(8,0)] : true,
+      [utils.asGridCoords(9,0)] : true,
+      [utils.asGridCoords(10,0)] : true,
+      [utils.asGridCoords(11,0)] : true,
+      [utils.asGridCoords(12,0)] : true,
+      [utils.asGridCoords(13,0)] : true,
+      [utils.asGridCoords(14,0)] : true,
+      [utils.asGridCoords(15,1)] : true,
+      [utils.asGridCoords(15,2)] : true,
+      [utils.asGridCoords(15,3)] : true,
+      [utils.asGridCoords(16,4)] : true,
+      [utils.asGridCoords(17,4)] : true,
+      [utils.asGridCoords(18,4)] : true,
+      [utils.asGridCoords(19,5)] : true,
+      [utils.asGridCoords(19,6)] : true,
+      [utils.asGridCoords(19,7)] : true,
+      [utils.asGridCoords(19,8)] : true,
+      [utils.asGridCoords(19,10)] : true,
+      [utils.asGridCoords(19,11)] : true,
+      [utils.asGridCoords(19,12)] : true,
+      [utils.asGridCoords(19,13)] : true,
+      [utils.asGridCoords(19,14)] : true,
+      [utils.asGridCoords(19,15)] : true,
+      [utils.asGridCoords(20,9)] : true,
+      [utils.asGridCoords(1,16)] : true,
+      [utils.asGridCoords(2,16)] : true,
+      [utils.asGridCoords(3,16)] : true,
+      [utils.asGridCoords(4,16)] : true,
+      [utils.asGridCoords(4,17)] : true,
+      [utils.asGridCoords(4,18)] : true,
+      [utils.asGridCoords(5,19)] : true,
+      [utils.asGridCoords(6,19)] : true,
+      [utils.asGridCoords(7,19)] : true,
+      [utils.asGridCoords(8,19)] : true,
+      [utils.asGridCoords(9,19)] : true,
+      [utils.asGridCoords(11,19)] : true,
+      [utils.asGridCoords(12,19)] : true,
+      [utils.asGridCoords(13,19)] : true,
+      [utils.asGridCoords(14,19)] : true,
+      [utils.asGridCoords(15,19)] : true,
+      [utils.asGridCoords(16,19)] : true,
+      [utils.asGridCoords(10,20)] : true,
+    }
+  },
+
   MainRegion3: {
     id: "MainRegion3",
     lowerSrc: "/images/maps/MainRegion3Lower.png",
@@ -1449,6 +1580,7 @@ window.OverworldMaps = {
             {
               events: [
                 { type: "textMessage", text: "Nraaah!", faceHero:"horseA" }
+                //add horse sound
               ]
             }
           ]
@@ -1459,14 +1591,14 @@ window.OverworldMaps = {
           y: utils.withGrid(2),
           storyFlag: "USED_HORSE_SPAWNER_U1",
           horses: ["u001"]
-       },
+      },
     },
     cutsceneSpaces: {
       [utils.asGridCoords(0,14)]: [
         {
           events: [
-            { 
-              type: "changeMap", 
+            {
+              type: "changeMap",
               map: "MainRegion2",
               x: utils.withGrid(19),
               y: utils.withGrid(16),
@@ -1742,16 +1874,16 @@ window.OverworldMaps = {
       [utils.asGridCoords(0,14)]: [
         {
           events: [
-            { 
+            {
               type: "changeMap", 
               map: "MainRegion3",
               x: utils.withGrid(18),
               y: utils.withGrid(14),
-              direction: "left" 
+              direction: "left"
             }
           ]
         }
       ],
     }
-  },    
+  },
 }

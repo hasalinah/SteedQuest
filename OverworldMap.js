@@ -1,3 +1,4 @@
+
 class OverworldMap {
   constructor(config) {
     this.overworld = null;
@@ -482,46 +483,7 @@ RegionTwo: {
         },
       ]
     },
-        npc3: {
-              //chapter 1 Roderick - intro 
-              type: "Person",
-              x: utils.withGrid(14),//changed position
-              y: utils.withGrid(8),
-              src: "/images/characters/people/npc3.png",
-              behaviorLoop: [
-                { type: "stand", direction: "left", time: 1800},
-                { type: "stand", direction: "down", time: 1800 },
-                { type: "stand", direction: "right", time: 1400 },
-                { type: "stand", direction: "down", time: 1300 },
-              ],
-              talking: [
-                {
-                  required: ["HEALED_ELORA"],
-                  events: [
-                   // { type: "textMessage", text: "You're strong, but you can always be better. Try battling and race your horse to improve.", faceHero: "npc3" },
-                   //  { type: "textMessage", text: "Good luck, young one!", faceHero: "npc3" },
-                  ]
-                },
-                {
-                  required: ["BATTLED_ELORA"],
-                  events: [
-                   // { type: "textMessage", text: "I've been watching you, young one. You've got potential.", faceHero: "npc3" },
-                   // { type: "healHorsesHp" },
-                   // { type: "addStoryFlag", flag: "HEALED_ELORA" },
-                  ]
-                },
-                {
-                  events: [
-                    { type: "textMessage", text: "Welcome, My name is Roderick!", faceHero:"npc3" },
-                    { type: "textMessage", text: "I've been watching you. You may have potential...", faceHero:"npc3" },
-                    { type: "textMessage", text: "You're strong, but you can always be better. Try battling and race your horse to improve.", faceHero:"npc3" },
-                    { type: "textMessage", text: "Good luck on your journey young one!", faceHero:"npc3" },
-                //    { type: "battle", enemyId: "elora" }, //may need to be changed 
-                //   { type: "addStoryFlag", flag: "BATTLED_ELORA" },
-                  ]
-                }
-              ]
-        },
+
   },
   walls: {
     [utils.asGridCoords(0,9)] : true,

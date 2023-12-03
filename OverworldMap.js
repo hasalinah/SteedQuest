@@ -2064,36 +2064,7 @@ MainRegion6: { //chapter 9 -- race
       ]
     },
 
-      trainer3: {
-        type: "Person",
-        x: utils.withGrid(4),
-        y: utils.withGrid(9),
-        src: "/images/characters/people/guy1.png",
-        behaviorLoop: [
-          { type: "walk", direction: "down", time: 2800 },
-          { type: "walk", direction: "down", time: 2800 },
-          { type: "stand", direction: "down", time: 2800 },
-          { type: "walk", direction: "up" , time: 2800},
-          { type: "walk", direction: "up" , time: 2800},
-          { type: "stand", direction: "up", time: 2800 },
-        ],
-        talking: [///ADD Race here 
-          {
-            required: ["BATTLED_SELENE"],
-            events: [
-              { type: "textMessage", text: "We see you have some strong horses. See you around sometime, maybe for a rematch!", faceHero: "trainer3" }
-            ]
-          },
-          {
-            events: [//Add race here 
-              { type: "textMessage", text: "I'm the champion, I hope you dont think you could beat me. Ha!", faceHero: "trainer3"},
-              { type: "textMessage", text: "I have a magnificent horse radiating an otherworldly aura, with unparalleled speed and grace. Lets Race", faceHero: "trainer3"},
-              { type: "battle", enemyId: "selene" },
-              { type: "addStoryFlag", flag: "BATTLED_SELENE" },
-            ]
-          }
-        ]
-      },
+
         guy5: {
         //orik - blacksmith 
         type: "Person",
@@ -2130,6 +2101,38 @@ MainRegion6: { //chapter 9 -- race
               { type: "textMessage", text: "You can earn powerful gear for your horses by completing the quest...", faceHero: "guy5" },
               { type: "textMessage", text: "Collect all the apples from the buckets and I will trade you a horseshoe.", faceHero: "guy5" },
               
+            ]
+          }
+        ]
+      },
+
+      trainer3: {
+        type: "Person",
+        x: utils.withGrid(4),
+        y: utils.withGrid(9),
+        src: "/images/characters/people/guy1.png",
+        behaviorLoop: [
+          { type: "walk", direction: "down", time: 2800 },
+          { type: "walk", direction: "down", time: 2800 },
+          { type: "stand", direction: "down", time: 2800 },
+          { type: "walk", direction: "up" , time: 2800},
+          { type: "walk", direction: "up" , time: 2800},
+          { type: "stand", direction: "up", time: 2800 },
+        ],
+        talking: [///ADD Race here 
+          {
+            required: ["BATTLED_SELENE"],
+            events: [
+              { type: "textMessage", text: "We see you have some strong horses. See you around sometime, maybe for a rematch!", faceHero: "trainer3" }
+            ]
+          },
+          {
+            events: [//Add race here 
+              { type: "textMessage", text: "I'm the champion, I hope you dont think you could beat me. Ha!", faceHero: "trainer3"},
+              { type: "textMessage", text: "I have a magnificent horse radiating an otherworldly aura, with unparalleled speed and grace.", faceHero: "trainer3"},
+              { type: "textMessage", text: "Lets Race, May the best rider win. ", faceHero: "trainer3"},
+              { type: "battle", enemyId: "selene" },
+              { type: "addStoryFlag", flag: "BATTLED_SELENE" },
             ]
           }
         ]
